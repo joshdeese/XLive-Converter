@@ -151,7 +151,7 @@ def extractSession():
 
 # parameters
 # channel number		(unsigned integer)    channel to be extract
-def extractChannel(channel_no):
+def extractChannel(channel_no, dest_dir, outfile):
 	""" Extract a single channel from the complete session length"""
 	start=timer()
 
@@ -164,14 +164,18 @@ def extractChannel(channel_no):
 	buf_size= 1024*1024*4				#Bytes  DO NOTE CHANGE!!
 
 
-	try:
-		os.mkdir( "channel_" +str(channel_no) + "_"+ session_str, 0o755)
-	except:
-		print("please remove existing folder")
-		return
+	#try:
+	#	os.mkdir( "channel_" +str(channel_no) + "_"+ session_str, 0o755)
+	#except:
+	#	print("please remove existing folder")
+	#	return
 
-	wave=create_wave("channel_" +str(channel_no) + "_" + session_str, total_length,sample_rate, channel_no)
+	#wave=create_wave("channel_" +str(channel_no) + "_" + session_str, total_length,sample_rate, channel_no)
+	wave=create_wave(dest_dir, total_length,sample_rate, channel_no, outfile)
 	print("Unpacking audio data, this may take a  while :)")
+
+	if outfile == "":
+		outfile = "ch_" +str(channel_no)
 
 	#get data of takes and write files
 	for i in range(no_takes):

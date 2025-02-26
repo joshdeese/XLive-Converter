@@ -104,13 +104,13 @@ def close_waves(waves, no_waves):
 		waves[i].close()
 
 ##
-def create_wave(folder,no_samples,sample_rate, ch_number):
+def create_wave(folder,no_samples,sample_rate, ch_number, outfile):
 	"""create audio files and write WAVE header"""
 	bytes_datachunk=no_samples*3
 
 	chan = []
 	for i in range(1):
-		chan.append(open( folder+ "/" + "ch_"+str(ch_number)+".wav","wb"))
+		chan.append(open( folder+ "/" + outfile +".wav","wb"))
 		chan[i].write("RIFF")
 		chan[i].write(struct.pack('<I',bytes_datachunk+36))
 		chan[i].write("WAVE")
